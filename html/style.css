@@ -1,0 +1,65 @@
+body {
+  display: none;
+  background:transparent !important;
+  font-family: 'Arial Black', Gadget, sans-serif;
+  font-size: 20px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.context-menu {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  left: 50%;
+  bottom: 50%;
+  translate: transform(-50%, -50%);
+}
+
+.menu-button {
+  position: relative;
+  background-color: #1c1c1e;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  border: 2px solid #2575fc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;  
+}
+
+.menu-button .progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(106, 17, 203, 0.4), rgba(37, 117, 252, 0.4));
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.menu-options {
+  list-style-type: none;
+  padding: 5px;
+  margin: 0;
+}
+
+.menu-options li {
+  margin-bottom: 4px;
+  background-color: #1c1c1e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: 2px solid #2575fc;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.menu-options li.active {
+  background: linear-gradient(45deg, rgba(106, 17, 203, 0.4), rgba(37, 117, 252, 0.4));
+}
