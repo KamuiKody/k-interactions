@@ -38,13 +38,6 @@ function setActiveOption(index) {
 function closeInteraction() {
   if (resetProgress()) $("#context-menu").hide();
 }
-openInteraction('b', [
-  { label: 'Option 1' },
-  { label: 'Option 2' },
-  { label: 'Option 3' }
-]);
-
-
 
 window.addEventListener('message', function(event) {
   switch(event.data.action) {
