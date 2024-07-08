@@ -1,8 +1,9 @@
 let $contextMenu = $("#context-menu");
 let $menuOptions = $(".menu-options");
+let hit = null;
 let activeIndex = 0;
 let progress = 0;
-let options = null;
+let options = [];
 
 function openInteraction(letter, options) {
   $('body').css('display', 'block');
@@ -37,10 +38,18 @@ function setActiveOption(index) {
 function closeInteraction() {
   if (resetProgress()) $("#context-menu").hide();
 }
+openInteraction('b', [
+  { label: 'Option 1' },
+  { label: 'Option 2' },
+  { label: 'Option 3' }
+]);
+
+
 
 window.addEventListener('message', function(event) {
   switch(event.data.action) {
     case "open":
+      activeIndex = 0
       options = null;
       $('body').css('display', 'block');
     break;
@@ -53,23 +62,28 @@ window.addEventListener('message', function(event) {
       closeInteraction()
     break;
     case "up":
-      if ($contextMenu.is(':visible')) {
+      if ($contextMenu.is(':visible') && options.length) {
         activeIndex = (activeIndex - 1 + options.length) % options.length;
         setActiveOption(activeIndex);
       }
     break;
     case "down":
-      if ($contextMenu.is(':visible')) {
+      if ($contextMenu.is(':visible') && options.length) {
         activeIndex = (activeIndex + 1) % options.length;
         setActiveOption(activeIndex);
       }
     break;
     case 'keydown':
-        setProgress(progress + 1)
-        if (progress >= 100) {
-          $.post(`https://k-interactions/enter`, JSON.stringify({index: activeIndex + 1}));
-          closeInteraction();
-        }
+      if (hit) return;
+      setProgress(event.data.progress);
+      if (progress >= 100) {
+        hit = true;
+        $.post(`https://interactions/enter`, JSON.stringify({index: activeIndex + 1}));
+        closeInteraction();
+        setTimeout(() => {
+          hit = null;
+        }, 1000);
+      }
     break;
     case "keyup":
       resetProgress();

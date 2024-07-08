@@ -7,10 +7,14 @@ description 'standalone dui interaction menu'
 
 ui_page 'html/index.html'
 
+server_scripts {
+    'server/main.lua'
+}
+
 client_scripts {
     'client/init.lua',
     'config.lua',
-    'exports.lua',
+    'client/exports.lua',
     'client/interactions.lua'
 }
 

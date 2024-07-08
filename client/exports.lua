@@ -8,6 +8,7 @@ local function RegisterLocation(key, menuOptions, position, drawDistance)
     local id = #Config.Locations + 1
     if not menuOptions or not position or not drawDistance then return false end
     Config.Locations[id] = {
+        resource = GetInvokingResource(),
         id = id,
         active = true,
         drawDistance = drawDistance,

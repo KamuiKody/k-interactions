@@ -20,3 +20,10 @@ end
 function rgba(r, g, b, a)
     return {r = r, g = g, b = b, a = a}
 end
+
+RegisterNetEvent('interactions:client:clearInteractions', function(resourceName)
+    for id, data in pairs(Config.Locations) do
+        print(data.resource)
+        if data.resource == resourceName then Config.Locations[id] = nil end
+    end
+end)
